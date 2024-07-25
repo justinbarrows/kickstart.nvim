@@ -5,9 +5,13 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- [personally added - jsb]
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>", { desc = "open explorer" })
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
+
+-- Save file and quit
+vim.keymap.set("n", "<Leader>q", ":quit<Return>", { desc = "quit" })
+vim.keymap.set("n", "<Leader>Q", ":qa<Return>", {desc = "quit all"})
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -81,10 +85,10 @@ vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+--vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
+--vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+--vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+--vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -299,7 +303,7 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
             vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
             vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-            vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+            vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
             -- Slightly advanced example of overriding default behavior and theme
             vim.keymap.set("n", "<leader>/", function()
@@ -696,13 +700,13 @@ require("lazy").setup({
         -- change the command in the config to whatever the name of that colorscheme is.
         --
         -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-        "rose-pine/neovim",
+        "EdenEast/nightfox.nvim",
         priority = 1000, -- Make sure to load this before all the other start plugins.
         init = function()
             -- Load the colorscheme here.
             -- Like many other themes, this one has different styles, and you could load
             -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-            vim.cmd.colorscheme("rose-pine")
+            vim.cmd.colorscheme("carbonfox")
 
             -- You can configure highlights by doing something like:
             vim.cmd.hi("Comment gui=none")
@@ -795,8 +799,8 @@ require("lazy").setup({
     -- require 'kickstart.plugins.indent_line',
     -- require 'kickstart.plugins.lint',
     -- require 'kickstart.plugins.autopairs',
-    -- require 'kickstart.plugins.neo-tree',
-    -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+    require("kickstart.plugins.neo-tree"),
+    require("kickstart.plugins.gitsigns"), -- adds gitsigns recommend keymaps
 
     -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
     --    This is the easiest way to modularize your config.
